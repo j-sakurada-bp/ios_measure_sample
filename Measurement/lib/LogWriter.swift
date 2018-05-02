@@ -263,6 +263,9 @@ class LogWriter {
         do {
             let file = getFileUrl(type: type);
             let fh = try FileHandle(forWritingTo: file!)
+            defer {
+                fh.closeFile()
+            }
             
             let append = data + "\n"
             fh.seekToEndOfFile()

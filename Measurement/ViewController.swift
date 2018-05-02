@@ -2,9 +2,9 @@ import UIKit
 import CoreMotion
 import CoreLocation
 
-class ViewController: UIViewController { // (計測系)CLLocationManagerDelegateを適合する
+class ViewController: UIViewController {
 
-    // == (計測系)ここから ==========================================================
+    // == (計測系)ここから - インスタンス変数宣言箇所に記述する ==========================================================
     // GPS計測マネージャ
     let _locManager = CLLocationManager()
     // 加速度、ジャイロ、磁気計測マネージャ
@@ -22,7 +22,7 @@ class ViewController: UIViewController { // (計測系)CLLocationManagerDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // == (計測系)ここから ==========================================================
+        // == (計測系)ここから - 初期化を行う箇所に記述する ==========================================================
         // [TODO] DBから初期化に必要なパラメータを取得して設定する
         let requestInterval: Double = 60
         let acc_interval: Double = 0.05
@@ -52,13 +52,13 @@ class ViewController: UIViewController { // (計測系)CLLocationManagerDelegate
     }
     
     @IBAction func btnStartTapped(_ sender: UIButton) {
-        // == (計測系)ここから ==========================================================
+        // == (計測系)ここから - 計測を開始する箇所に記述する ==========================================================
         startMeasure()
         // == (計測系)ここまで ==========================================================
     }
     
     @IBAction func btnFinishTapped(_ sender: UIButton) {
-        // == (計測系)ここから ==========================================================
+        // == (計測系)ここから - 計測を終了する箇所に記述する ==========================================================
         stopMeasure()
         // == (計測系)ここまで ==========================================================
     }
@@ -109,7 +109,7 @@ class ViewController: UIViewController { // (計測系)CLLocationManagerDelegate
 
 // MARK: - CLLocationManagerDelegate適合
 
-extension ViewController : CLLocationManagerDelegate {
+extension ViewController : CLLocationManagerDelegate { // View名は要修正
     
     /// ロケーションマネージャからのコールバック関数（成功時）
     ///
