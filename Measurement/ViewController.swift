@@ -77,11 +77,11 @@ extension ViewController : CLLocationManagerDelegate { // View名は要修正
     /// ログライター、モーションマネージャを初期化して生成する
     ///
     /// - Parameters:
-    ///   - requestInterval: <#requestInterval description#>
-    ///   - accelarateInterval: <#accelarateInterval description#>
-    ///   - gyroInterval: <#gyroInterval description#>
-    ///   - magnetoInterval: <#magnetoInterval description#>
-    ///   - gravityInterval: <#gravityInterval description#>
+    ///   - requestInterval: サーバへログ情報を送信する間隔
+    ///   - accelarateInterval: 加速度を計測する間隔
+    ///   - gyroInterval: ジャイロを計測する間隔
+    ///   - magnetoInterval: 磁気を計測する間隔
+    ///   - gravityInterval: 重力加速度を計測する間隔
     func initializeManager(requestInterval: Double,
                            accelarateInterval: Double,
                            gyroInterval: Double,

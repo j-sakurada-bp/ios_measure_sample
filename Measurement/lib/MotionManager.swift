@@ -15,7 +15,15 @@ class MotionManager {
     
     //MARK: - イニシャライザ
     
+
     /// イニシャライザ
+    ///
+    /// - Parameters:
+    ///   - queue: センサー情報を記録するタスクを管理するキュー
+    ///   - accInterval: 加速度を計測する間隔
+    ///   - gyrInterval: ジャイロを計測する間隔
+    ///   - mgtInterval: 磁気を計測する間隔
+    ///   - grvInterval: 重力加速度を計測する間隔
     init(queue: OperationQueue,
          accInterval: Double = 0.05,
          gyrInterval: Double = 0.05,

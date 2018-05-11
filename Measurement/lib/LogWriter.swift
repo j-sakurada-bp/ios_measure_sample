@@ -29,7 +29,12 @@ class LogWriter {
     
     //MARK: - イニシャライザ
     
+    
     /// イニシャライザ
+    ///
+    /// - Parameters:
+    ///   - queue: センサー情報を記録するタスクを管理するキュー
+    ///   - requestIntarval: サーバへログ情報を送信する間隔
     init(queue: OperationQueue, requestIntarval: Double = 1) {
         
         _queue = queue
