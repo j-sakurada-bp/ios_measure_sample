@@ -10,6 +10,7 @@ enum DATA_TYPE: String {
     case ACCELARATE = "ACC"
     case GYRO = "GYR"
     case MAGNETO = "MGT"
+    case GRAVITY = "GRV"
     case GPS = "GPS"
 }
 
@@ -18,13 +19,14 @@ enum LOG_FILE: String {
     case ACCELARATE = "accelarate.log"
     case GYRO = "gyro.log"
     case MAGNETO = "magneto.log"
+    case GRAVITY = "gravity.log"
     case GPS = "gps.log"
 }
 
 /// ファイル名を取得する。
 ///
-/// - Parameter type:
-/// - Returns:
+/// - Parameter type: DATA_TYPE
+/// - Returns: LOG_FILE
 func resolveFileName(type: DATA_TYPE) -> String {
     if type == DATA_TYPE.ACCELARATE {
         return LOG_FILE.ACCELARATE.rawValue
@@ -34,6 +36,9 @@ func resolveFileName(type: DATA_TYPE) -> String {
     }
     if type == DATA_TYPE.MAGNETO {
         return LOG_FILE.MAGNETO.rawValue
+    }
+    if type == DATA_TYPE.GRAVITY {
+        return LOG_FILE.GRAVITY.rawValue
     }
     if type == DATA_TYPE.GPS {
         return LOG_FILE.GPS.rawValue

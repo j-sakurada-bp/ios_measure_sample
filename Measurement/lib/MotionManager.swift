@@ -17,16 +17,18 @@ class MotionManager {
     
     /// イニシャライザ
     init(queue: OperationQueue,
-         accIntarval: Double = 0.05,
-         gyrIntarval: Double = 0.05,
-         mgtIntarval: Double = 0.05) {
+         accInterval: Double = 0.05,
+         gyrInterval: Double = 0.05,
+         mgtInterval: Double = 0.05,
+         grvInterval: Double = 0.05) {
         
         _queue = queue
         _logWriter = LogWriter(queue: _queue)
         _motManager = CMMotionManager()
-        _motManager.accelerometerUpdateInterval = accIntarval
-        _motManager.gyroUpdateInterval = gyrIntarval
-        _motManager.magnetometerUpdateInterval = mgtIntarval
+        _motManager.accelerometerUpdateInterval = accInterval
+        _motManager.gyroUpdateInterval = gyrInterval
+        _motManager.magnetometerUpdateInterval = mgtInterval
+        _motManager.deviceMotionUpdateInterval = grvInterval
     }
     
     deinit {
@@ -34,16 +36,18 @@ class MotionManager {
         _motManager.stopAccelerometerUpdates()
         _motManager.stopGyroUpdates()
         _motManager.stopMagnetometerUpdates()
+        _motManager.stopDeviceMotionUpdates()
     }
     
     //MARK: - internal func
     
     /// 計測を開始する。
     internal func startMeasurement() {
-        // 加速度、ジャイロ、磁気の計測を開始
+        // 加速度、ジャイロ、磁気、重力加速度の計測を開始
         startMeasureAccelarate()
         startMeasureGyro()
         startMeasureMagneto()
+        startMeasureGravity()
     }
     
     /// 計測を終了する。
@@ -52,6 +56,7 @@ class MotionManager {
         _motManager.stopAccelerometerUpdates()
         _motManager.stopGyroUpdates()
         _motManager.stopMagnetometerUpdates()
+        _motManager.stopDeviceMotionUpdates()
     }
     
     //MARK: - private func
@@ -95,6 +100,20 @@ class MotionManager {
             }
             // ファイルに出力
             self._logWriter.appendLog(type: DATA_TYPE.MAGNETO, data: [x, y, z])
+        })
+    }
+    
+    /// 重力加速度の計測を開始する。
+    private func startMeasureGravity() {
+        
+        _motManager.startDeviceMotionUpdates(to: _queue, withHandler: { (data, error) in
+            guard let x = data?.gravity.x,
+                let y = data?.gravity.y,
+                let z = data?.gravity.z else {
+                    return
+            }
+            // ファイルに出力
+            self._logWriter.appendLog(type: DATA_TYPE.GRAVITY, data: [x, y, z])
         })
     }
 }

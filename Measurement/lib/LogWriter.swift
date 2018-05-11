@@ -6,11 +6,12 @@ class LogWriter {
     
     // APIKEY
     let APIKEY = "TZyScwVfCb7tYEoGmTzKo46CM0FHv87N778QR8Qa"
+    // WebサービスAPI
     let SERVER_URL = "https://5wudskjzg7.execute-api.ap-northeast-1.amazonaws.com/prod/register_device_measurement"
     
     // 日付フォーマット
     let _COMMON_DATE_FORMAT = "yyyyMMddHHmmssSSS"
-    // キュー並行実行多重度
+    // キュー並行実行多重度（並行実行一切なし）
     let _CONCURRENT_COUNT = 1
     // ログファイル格納ディレクトリ
     let _dirpath: URL?
@@ -45,6 +46,7 @@ class LogWriter {
         createFile(type: DATA_TYPE.ACCELARATE)
         createFile(type: DATA_TYPE.GYRO)
         createFile(type: DATA_TYPE.MAGNETO)
+        createFile(type: DATA_TYPE.GRAVITY)
         createFile(type: DATA_TYPE.GPS)
     }
     
@@ -154,6 +156,10 @@ class LogWriter {
         }.resume()
     }
     
+    ///
+    ///
+    /// - Parameter data:
+    /// - Returns:
     private func dataToJson(data: Data?) -> Any {
         return try! JSONSerialization.jsonObject(
             with: data!,
@@ -166,24 +172,26 @@ class LogWriter {
     private func createLogParameter() -> String {
         
         // 各ログファイルからログリストを取得
-        let accLog = getLogFor(DATA_TYPE.ACCELARATE)
-        let gyrLog = getLogFor(DATA_TYPE.GYRO)
-        let mgtLog = getLogFor(DATA_TYPE.MAGNETO)
-        let gpsLog = getLogFor(DATA_TYPE.GPS)
-        //
+        let accLog = getLogStringFor(DATA_TYPE.ACCELARATE)
+        let gyrLog = getLogStringFor(DATA_TYPE.GYRO)
+        let mgtLog = getLogStringFor(DATA_TYPE.MAGNETO)
+        let grvLog = getLogStringFor(DATA_TYPE.GRAVITY)
+        let gpsLog = getLogStringFor(DATA_TYPE.GPS)
+
+        // ファイル生成日時
         let datetime = getDateString()
         // JSON文字列を生成
-        return "{\"uuid\":\"\(_uuid)\",\"datetime\":\"\(datetime)\",\(accLog),\(gyrLog),\(mgtLog),\(gpsLog)}"
+        return "{\"uuid\":\"\(_uuid)\",\"datetime\":\"\(datetime)\",\(accLog),\(gyrLog),\(mgtLog),\(grvLog),\(gpsLog)}"
     }
     
     /// 指定されたログ種別のログ情報をログファイルから取得し、サーバ送信用文字列を生成する。
     ///
     /// - Parameter type: ログ種別
     /// - Returns: サーバ送信用文字列
-    private func getLogFor(_ type: DATA_TYPE) -> String {
+    private func getLogStringFor(_ type: DATA_TYPE) -> String {
         
         let typeName = type.rawValue
-        let logs = readTextToLines(type: type) // 「""」行を振るい落としている
+        let logs = readTextToLines(type: type) // 「""」行（空行）を振るい落としている
         let log = "\"" + logs.joined(separator: "\",\n\"") + "\""
         // JOSN文字列を生成
         return "\"\(typeName)\":[\(log)]";
