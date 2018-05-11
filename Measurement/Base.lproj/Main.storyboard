@@ -19,24 +19,27 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YsZ-DY-3az" userLabel="btnInitLog">
-                                <rect key="frame" x="118" y="125" width="138" height="30"/>
+                                <rect key="frame" x="118" y="125" width="150" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.98457909385721198" green="1" blue="0.74982446754534382" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="ログファイル初期化"/>
                                 <connections>
                                     <action selector="btnInitLogTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="frU-Pn-M3F"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3VJ-y1-k6h" userLabel="btnStart">
-                                <rect key="frame" x="156" y="163" width="62" height="30"/>
+                                <rect key="frame" x="118" y="163" width="150" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.73688272840000002" green="1" blue="0.9870295415" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="記録開始"/>
                                 <connections>
                                     <action selector="btnStartTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="buy-sv-TXh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xmK-N3-UCQ" userLabel="btnFinish">
-                                <rect key="frame" x="156" y="201" width="62" height="30"/>
+                                <rect key="frame" x="118" y="201" width="150" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.61153889299999997" green="1" blue="0.55548767070000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <state key="normal" title="記録終了"/>
                                 <connections>
                                     <action selector="btnFinishTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SvF-DR-Dhg"/>

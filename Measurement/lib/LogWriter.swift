@@ -8,9 +8,9 @@ class LogWriter {
     let APIKEY = "TZyScwVfCb7tYEoGmTzKo46CM0FHv87N778QR8Qa"
     // WebサービスAPI
     let SERVER_URL = "https://5wudskjzg7.execute-api.ap-northeast-1.amazonaws.com/prod/register_device_measurement"
-    
     // 日付フォーマット
     let _COMMON_DATE_FORMAT = "yyyyMMddHHmmssSSS"
+    
     // キュー並行実行多重度（並行実行一切なし）
     let _CONCURRENT_COUNT = 1
     // ログファイル格納ディレクトリ
@@ -22,6 +22,7 @@ class LogWriter {
     let _request_intarval: Double
     // ログ出力管理用キュー
     let _queue: OperationQueue
+    // サーバリクエスト管理用キュー（ログ出力完了用キューと共用しても大丈夫かと）
     let _requestQueue = OperationQueue()
     // サーバ通信タスク管理用タイマー
     var _timer: Timer?

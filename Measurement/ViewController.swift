@@ -42,16 +42,25 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 
+    /// ログファイル初期化ボタンイベントハンドラ
+    ///
+    /// - Parameter sender: <#sender description#>
     @IBAction func btnInitLogTapped(_ sender: UIButton) {
         _logWriter.initLogFile() // 端末上のログファイル(テキストファイル)をクリアする場合に使用する
     }
     
+    /// 記録開始ボタンイベントハンドラ
+    ///
+    /// - Parameter sender: <#sender description#>
     @IBAction func btnStartTapped(_ sender: UIButton) {
         // == (計測系)ここから - 計測を開始する箇所に記述する ===========================
         startMeasure()
         // == (計測系)ここまで ==========================================================
     }
     
+    /// 記録終了ボタンイベントハンドラ
+    ///
+    /// - Parameter sender: <#sender description#>
     @IBAction func btnFinishTapped(_ sender: UIButton) {
         // == (計測系)ここから - 計測を終了する箇所に記述する ===========================
         stopMeasure()
@@ -65,6 +74,14 @@ class ViewController: UIViewController {
 
 extension ViewController : CLLocationManagerDelegate { // View名は要修正
     
+    /// ログライター、モーションマネージャを初期化して生成する
+    ///
+    /// - Parameters:
+    ///   - requestInterval: <#requestInterval description#>
+    ///   - accelarateInterval: <#accelarateInterval description#>
+    ///   - gyroInterval: <#gyroInterval description#>
+    ///   - magnetoInterval: <#magnetoInterval description#>
+    ///   - gravityInterval: <#gravityInterval description#>
     func initializeManager(requestInterval: Double,
                            accelarateInterval: Double,
                            gyroInterval: Double,
@@ -119,6 +136,7 @@ extension ViewController : CLLocationManagerDelegate { // View名は要修正
         print("EROOR : \(error)")
     }
     
+    /// センサーによる計測/記録を開始する。
     func startMeasure() {
         // 加速度、ジャイロ、磁気の計測を開始
         _motionManager.startMeasurement()
@@ -128,6 +146,7 @@ extension ViewController : CLLocationManagerDelegate { // View名は要修正
         _logWriter.startOperationSendRequest()
     }
     
+    /// センサーによる計測/記録を終了する。
     func stopMeasure() {
         // モーション系センサー停止
         _motionManager.stopMeasurement()
@@ -138,6 +157,7 @@ extension ViewController : CLLocationManagerDelegate { // View名は要修正
         _logWriter.stopOperationSendRequest()
     }
     
+    /// GPSによる計測/記録を終了する。
     func startMeasureLocation() {
         setupLocManager()
         _locManager.startUpdatingHeading() // 電子コンパスの使用を開始する
